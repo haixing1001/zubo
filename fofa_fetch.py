@@ -9,7 +9,7 @@ from datetime import datetime, timezone, timedelta
 # ===============================
 # 配置区
 FOFA_URLS = {
-    "https://fofa.info/result?qbase64=InVkcHh5IiAmJiBjb3VudHJ5PSJDTiIgJiYgcmVnaW9uPSJTaGFuZ2hhaSI=&filter_type=last_month": "ip.txt",
+    "https://fofa.info/result?qbase64=YXBwPSJ1ZHB4eS1TZXJ2ZXIiICYmIHJlZ2lvbj0iU2hhbmdoYWki": "ip.txt",
 }
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
