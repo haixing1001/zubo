@@ -220,6 +220,8 @@ def get_isp_by_regex(ip):
 
 # ===============================
 # 第一阶段
+# ===============================
+# 第一阶段
 def first_stage():
     os.makedirs(IP_DIR, exist_ok=True)
     all_ips = set()
@@ -228,6 +230,13 @@ def first_stage():
         print(f"📡 正在爬取 {filename} ...")
         try:
             r = requests.get(url, headers=HEADERS, timeout=15)
+            
+            # 👇 【新增代码】将获取到的 FOFA 网页源码保存至仓库根目录的 FOFA.TXT
+            with open("FOFA.TXT", "w", encoding="utf-8") as f_fofa:
+                f_fofa.write(r.text)
+            print("📝 已成功将 FOFA 源码保存至根目录 FOFA.TXT")
+            # 👆 【新增结束】
+
             urls_all = re.findall(r'<a href="http://(.*?)"', r.text)
             all_ips.update(u.strip() for u in urls_all if u.strip())
         except Exception as e:
