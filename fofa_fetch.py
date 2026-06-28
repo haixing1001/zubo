@@ -285,13 +285,31 @@ def first_stage():
     count = get_run_count() + 1
     save_run_count(count)
 
-    for filename, ip_set in province_isp_dict.items():
+# === 将第一阶段末尾的写入部分替换为以下代码 ===
+
+    for filename, new_ip_set in province_isp_dict.items():
         path = os.path.join(IP_DIR, filename)
+        
+        # 1. 建立一个集合，先装入本次新爬取到的 IP
+        combined_ips = set(new_ip_set) 
+        
+        # 2. 如果文件已经存在，读取历史 IP 并加入集合（集合会自动去重）
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    for line in f:
+                        ip_port = line.strip()
+                        if ip_port:
+                            combined_ips.add(ip_port)
+            except Exception as e:
+                print(f"⚠️ 读取历史文件 {path} 失败：{e}")
+        
+        # 3. 使用 "w" 模式覆盖写入去重后的所有 IP
         try:
-            with open(path, "a", encoding="utf-8") as f:
-                for ip_port in sorted(ip_set):
+            with open(path, "w", encoding="utf-8") as f:
+                for ip_port in sorted(combined_ips):
                     f.write(ip_port + "\n")
-            print(f"{path} 已追加写入 {len(ip_set)} 个 IP")
+            print(f"📝 {path} 已去重保存，总计 {len(combined_ips)} 个 IP (含本次新增 {len(new_ip_set)} 个)")
         except Exception as e:
             print(f"❌ 写入 {path} 失败：{e}")
 
