@@ -33,6 +33,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Run fofa_fetch.py
+        env:
+          FOFA_COOKIE: ${{ secrets.FOFA_COOKIE }}  # 👇 【新增代码】将 GitHub Secrets 注入到环境变量中
         run: python fofa_fetch.py
 
       - name: Commit and push changes
