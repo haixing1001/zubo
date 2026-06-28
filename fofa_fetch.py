@@ -14,6 +14,13 @@ FOFA_URLS = {
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 }
+# 👇 【新增代码】尝试从环境变量读取 FOFA_COOKIE，如果存在则加入到请求头中
+fofa_cookie = os.environ.get("FOFA_COOKIE")
+if fofa_cookie:
+    HEADERS["Cookie"] = fofa_cookie
+    print("🔑 已成功加载环境变量中的 FOFA_COOKIE")
+else:
+    print("⚠️ 未检测到 FOFA_COOKIE 环境变量，将以未登录状态访问")
 
 COUNTER_FILE = "计数.txt"
 IP_DIR = "ip"
