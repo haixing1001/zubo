@@ -12,7 +12,7 @@ FOFA_URLS = {
     "https://fofa.info/result?qbase64=YXBwPSJ1ZHB4eS1TZXJ2ZXIiICYmIHJlZ2lvbj0iU2hhbmdoYWki&filter_type=last_year": "ip.txt",
 }
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
 }
 # 👇 【新增代码】尝试从环境变量读取 FOFA_COOKIE，如果存在则加入到请求头中
 fofa_cookie = os.environ.get("FOFA_COOKIE")
